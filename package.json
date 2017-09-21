@@ -1,0 +1,20 @@
+{
+  "name": "curso-profesional-frontend-septiembre-2017",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webtrainingmx/curso-profesional-frontend-septiembre-2017.git"
+  },
+  "author": "Alex Arriaga <alex.arriaga@webtraining.mx>",
+  "license": "UNLICENSED",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/webtrainingmx/curso-profesional-frontend-septiembre-2017/issues"
+  },
+  "homepage": "https://github.com/webtrainingmx/curso-profesional-frontend-septiembre-2017#readme"
+}
