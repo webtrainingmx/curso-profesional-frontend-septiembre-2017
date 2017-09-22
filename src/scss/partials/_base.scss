@@ -1,0 +1,11 @@
+@import "variables";
+
+body {
+	color: $color-text;
+	font-family: 'Lato', sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
+h2 {
+	font-family: 'Lato', sans-serif;
+}

@@ -1,0 +1,29 @@
+@import "variables";
+
+.b-main-header {
+	height: 60px;
+	background-color: $color-primary;
+}
+
+.b-main-content {
+	min-height: 600px;
+	background-color: white;
+}
+
+.b-main-footer {
+	height: 60px;
+	background-color: $color-primary;
+}
+
+.b-section {
+	overflow: hidden;
+	padding: 100px 0;
+
+	&--learn-signals {
+		background-color: $color-secondary;
+	}
+
+	&--practice {
+		background-color: $color-primary-light;
+	}
+}
