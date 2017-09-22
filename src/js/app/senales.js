@@ -1,15 +1,22 @@
 (function( $ ) {
 	var senalesComponent = (function() {
 		var serviceURL = 'http://projects-api.webtraining.zone:4000/traffic-signals/v1/signals';
+		var templateURL = '/dist/templates/signals.hbs';
 
 		function init() {
-			getTrafficSignalsData().then( function( data ) {
-				console.log( data );
-			} );
+
+			$.when.apply( [ getAJAXDataByURL( templateURL ), getAJAXDataByURL( serviceURL ) ] )
+				.then( function( data ) {
+					console.log( data );
+
+					// var source = $( "#entry-template" ).html();
+					// var template = Handlebars.compile( source );
+
+				} );
 		}
 
-		function getTrafficSignalsData() {
-			return $.ajax( serviceURL );
+		function getAJAXDataByURL( url ) {
+			return $.ajax( url );
 		}
 
 		return {

@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h1>
+                {{ title }}
+            </h1>
+        </div>
+
+        {{#each signals}}
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="b-signal">
+                    <h3 class="b-signal__title">{{name}}</h3>
+                    <div class="b-signal__image">
+                        <img class="img-responsive" src="http://projects-api.webtraining.zone/traffic-signals-images/sct/{{filename}}" alt="">
+                    </div>
+                    <div class="b-signal__description">
+                        {{description}}
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
