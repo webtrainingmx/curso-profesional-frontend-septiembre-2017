@@ -8,10 +8,11 @@
 
 	} );
 
+	var componentSelector = '#js-content-signals';
+
 	var senalesComponent = (function() {
 		var serviceURL = 'http://projects-api.webtraining.zone:4000/traffic-signals/v1/signals';
 		var templateURL = '/dist/templates/signals.hbs';
-		var componentSelector = '#js-content';
 
 		function init() {
 
@@ -36,6 +37,8 @@
 		}
 	})();
 
-	senalesComponent.init();
+	if ( ( componentSelector ).length > 0 ) {
+		senalesComponent.init();
+	}
 
 })( window.jQuery );
