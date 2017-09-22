@@ -26,13 +26,37 @@ gulp.task( 'copy-assets', () => {
 } );
 
 gulp.task( 'watch', () => {
-	watch( 'src/scss/**/*.scss', ( file ) => {
+	// Watch for changes on SASS files
+	watch( './src/scss/**/*.scss', ( file ) => {
 		util.log( 'SCSS file changed: ', file.path );
 		gulp.start( 'sass', browserSync.reload );
 
 	} ).on( 'error', function( error ) {
 		util.log( util.colors.red( 'Error' ), error.message );
 	} );
+
+	// Watch for changes on pages
+	watch( './src/pages/**/*.html', ( file ) => {
+		util.log( "Include HTML file changed: ", file.path );
+		gulp.start( "file-include", browserSync.reload );
+
+	} ).on( "error", function( error ) {
+		util.log( util.colors.red( "Error" ), error.message );
+	} );
+} );
+
+gulp.task( 'file-include', () => {
+	gulp.src( [ './src/pages/wrappers/*.include.html' ] )
+		.pipe( fileinclude( {
+			prefix: '@@',
+			basepath: '@file'
+		} ) )
+		.pipe( rename( ( path ) => {
+			path.dirname += "/";
+			path.basename = path.basename.replace( ".include", "" );
+			path.extname = ".html"
+		} ) )
+		.pipe( gulp.dest( './dist/pages' ) );
 } );
 
 gulp.task( 'browserSync', () => {
@@ -45,4 +69,4 @@ gulp.task( 'browserSync', () => {
 
 gulp.task( 'build', [ 'sass' ] );
 
-gulp.task( 'serve', [ 'copy-assets', 'sass', 'watch', 'browserSync' ] );
+gulp.task( 'serve', [ 'file-include', 'copy-assets', 'sass', 'watch', 'browserSync' ] );
