@@ -4,7 +4,7 @@ const util = require( 'util' );
 const rename = require( 'gulp-rename' );
 const cleanCSS = require( 'gulp-clean-css' );
 const sourcemaps = require( 'gulp-sourcemaps' );
-
+const uglify = require( 'gulp-uglify' );
 const watch = require( 'gulp-watch' );
 const fileinclude = require( 'gulp-file-include' );
 const browserSync = require( 'browser-sync' ).create();
@@ -30,6 +30,15 @@ gulp.task( 'watch', () => {
 	watch( './src/scss/**/*.scss', ( file ) => {
 		util.log( 'SCSS file changed: ', file.path );
 		gulp.start( 'sass', browserSync.reload );
+
+	} ).on( 'error', function( error ) {
+		util.log( util.colors.red( 'Error' ), error.message );
+	} );
+
+	// Watch for changes on JavaScript files
+	watch( './src/js/**/*.js', ( file ) => {
+		util.log( 'JavaScript file changed: ', file.path );
+		gulp.start( 'minify-js', browserSync.reload );
 
 	} ).on( 'error', function( error ) {
 		util.log( util.colors.red( 'Error' ), error.message );
@@ -67,6 +76,15 @@ gulp.task( 'browserSync', () => {
 	} )
 } );
 
-gulp.task( 'build', [ 'sass' ] );
+gulp.task( 'minify-js', () => {
+	return gulp.src( './src/js/**/*.js' )
+		.pipe( sourcemaps.init() )
+		.pipe( uglify() )
+		.pipe( rename( 'all-scripts.js' ) )
+		.pipe( sourcemaps.write() )
+		.pipe( gulp.dest( './dist/js' ) );
+} );
 
-gulp.task( 'serve', [ 'file-include', 'copy-assets', 'sass', 'watch', 'browserSync' ] );
+gulp.task( 'build', [ 'file-include', 'copy-assets', 'sass', 'minify-js' ] );
+
+gulp.task( 'serve', [ 'file-include', 'copy-assets', 'sass', 'minify-js', 'watch', 'browserSync' ] );
