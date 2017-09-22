@@ -47,6 +47,7 @@
 		color: white;
 		display: block;
 		padding: 14px 20px;
+		font-size: 15px;
 
 		&.is-active {
 			background-color: darken($color-primary, 5%);
