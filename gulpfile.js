@@ -21,10 +21,12 @@ gulp.task( 'sass', () => {
 		.pipe( gulp.dest( './dist/css' ) );
 } );
 
-gulp.task( 'copy-assets', () => {
-
-	gulp.src( './src/js/app/templates/*.hbs' )
+gulp.task( 'copy-templates', () => {
+	return gulp.src( './src/js/app/templates/*.hbs' )
 		.pipe( gulp.dest( './dist/templates' ) );
+} );
+
+gulp.task( 'copy-assets', () => {
 
 	return gulp.src( './src/img/*.png' )
 		.pipe( gulp.dest( './dist/img' ) )
@@ -56,6 +58,15 @@ gulp.task( 'watch', () => {
 
 	} ).on( "error", function( error ) {
 		util.log( util.colors.red( "Error" ), error.message );
+	} );
+
+	// Watch for changes on template files
+	watch( './src/js/app/templates/*.hbs', ( file ) => {
+		util.log( 'Template file changed: ', file.path );
+		gulp.start( 'copy-templates', browserSync.reload );
+
+	} ).on( 'error', function( error ) {
+		util.log( util.colors.red( 'Error' ), error.message );
 	} );
 } );
 
@@ -105,6 +116,6 @@ gulp.task( 'minify-js-vendor', () => {
 		.pipe( gulp.dest( './dist/js' ) );
 } );
 
-gulp.task( 'build', [ 'file-include', 'copy-assets', 'sass', 'minify-js', 'minify-js-vendor' ] );
+gulp.task( 'build', [ 'file-include', 'copy-assets', 'copy-templates', 'sass', 'minify-js', 'minify-js-vendor' ] );
 
-gulp.task( 'serve', [ 'file-include', 'copy-assets', 'sass', 'minify-js', 'minify-js-vendor', 'watch', 'browserSync' ] );
+gulp.task( 'serve', [ 'file-include', 'copy-assets', 'copy-templates', 'sass', 'minify-js', 'minify-js-vendor', 'watch', 'browserSync' ] );
