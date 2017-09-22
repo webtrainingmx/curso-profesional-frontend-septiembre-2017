@@ -2,6 +2,7 @@ const gulp = require( 'gulp' );
 const sass = require( 'gulp-sass' );
 const util = require( 'util' );
 const rename = require( 'gulp-rename' );
+const concat = require( 'gulp-concat' );
 const cleanCSS = require( 'gulp-clean-css' );
 const sourcemaps = require( 'gulp-sourcemaps' );
 const uglify = require( 'gulp-uglify' );
@@ -76,15 +77,30 @@ gulp.task( 'browserSync', () => {
 	} )
 } );
 
+const jsDir = './src/js/app/';
+
 gulp.task( 'minify-js', () => {
-	return gulp.src( './src/js/**/*.js' )
-		.pipe( sourcemaps.init() )
+	return gulp.src( [
+		jsDir + 'utils.js',
+		jsDir + 'navigation.js',
+		jsDir + 'senales.js'
+	] )
+		.pipe( concat( 'all-scripts.js' ) )
+		.pipe( gulp.dest( './dist/js' ) )
+		.pipe( rename( 'all-scripts.min.js' ) )
 		.pipe( uglify() )
-		.pipe( rename( 'all-scripts.js' ) )
-		.pipe( sourcemaps.write() )
 		.pipe( gulp.dest( './dist/js' ) );
 } );
 
-gulp.task( 'build', [ 'file-include', 'copy-assets', 'sass', 'minify-js' ] );
+gulp.task( 'minify-js-vendor', () => {
+	return gulp.src( './src/js/vendor/*.js' )
+		.pipe( concat( 'all-scripts-vendor.js' ) )
+		.pipe( gulp.dest( './dist/js' ) )
+		.pipe( uglify() )
+		.pipe( rename( 'all-scripts-vendor.min.js' ) )
+		.pipe( gulp.dest( './dist/js' ) );
+} );
 
-gulp.task( 'serve', [ 'file-include', 'copy-assets', 'sass', 'minify-js', 'watch', 'browserSync' ] );
+gulp.task( 'build', [ 'file-include', 'copy-assets', 'sass', 'minify-js', 'minify-js-vendor' ] );
+
+gulp.task( 'serve', [ 'file-include', 'copy-assets', 'sass', 'minify-js', 'minify-js-vendor', 'watch', 'browserSync' ] );

@@ -1,10 +1,10 @@
 (function( $ ) {
-	var app = (function() {
+	var navigationComponent = (function() {
 		function init() {
-			enableNavigation();
+			setActiveLinkInNavigation();
 		}
 
-		function enableNavigation() {
+		function setActiveLinkInNavigation() {
 			var currentSlug = $( '#js-content' ).data( 'slug' );
 
 			$( '#js-main-navigation' ).find( 'a' ).filter( function( index, navigationLink ) {
@@ -18,6 +18,6 @@
 
 	})();
 
-	app.init();
+	navigationComponent.init();
 
 })( window.jQuery );
