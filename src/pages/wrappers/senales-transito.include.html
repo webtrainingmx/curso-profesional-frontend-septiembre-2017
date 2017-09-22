@@ -7,8 +7,33 @@
         @@include('./../elements/header.partial.html')
 
         <!-- START: Content -->
-        <div id="js-content-signals" class="b-main-content" data-slug="senales-transito">
+        <div class="b-main-content" data-slug="senales-transito">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h1>
+                            Señales de tránsito
+                        </h1>
+                    </div>
 
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="b-search">
+                            <div class="input-group">
+
+                                <input id="js-filter" type="text" class="form-control" placeholder="Filtrar por nombre...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info" type="button">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div id="js-content-signals"></div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- END: Content-->
 
