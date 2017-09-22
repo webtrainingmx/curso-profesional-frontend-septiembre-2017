@@ -31,9 +31,22 @@
 					// Render the template
 					renderSignals( components.signalsComponent.originalSignals );
 
+					enableLazyLoadingForImages();
+
 					// Create filter
 					createFilter();
 				} );
+		}
+
+		function enableLazyLoadingForImages() {
+			$( '.lazy' ).Lazy( {
+				scrollDirection: 'vertical',
+				effect: 'fadeIn',
+				visibleOnly: true,
+				onError: function( element ) {
+					console.log( 'error loading ' + element.data( 'src' ) );
+				}
+			} );
 		}
 
 		function renderSignals( signals ) {
@@ -73,6 +86,7 @@
 				// hideNonMatchingItems( $items, searchTerm );
 				var filteredSignals = filterSignals( searchTerm );
 				renderSignals( filteredSignals );
+				enableLazyLoadingForImages();
 				//}
 
 			} );

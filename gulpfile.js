@@ -107,8 +107,14 @@ gulp.task( 'minify-js', () => {
 		.pipe( gulp.dest( './dist/js' ) );
 } );
 
+const jsDirVendor = './src/js/vendor/';
+
 gulp.task( 'minify-js-vendor', () => {
-	return gulp.src( './src/js/vendor/*.js' )
+	return gulp.src( [
+		jsDirVendor + 'handlebars-v4.0.10.js',
+		jsDirVendor + 'jquery.lazy.js',
+		jsDirVendor + 'jquery.lazy.plugins.js',
+	] )
 		.pipe( concat( 'all-scripts-vendor.js' ) )
 		.pipe( gulp.dest( './dist/js' ) )
 		.pipe( uglify() )
