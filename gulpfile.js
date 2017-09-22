@@ -22,6 +22,10 @@ gulp.task( 'sass', () => {
 } );
 
 gulp.task( 'copy-assets', () => {
+
+	gulp.src( './src/js/app/templates/*.hbs' )
+		.pipe( gulp.dest( './dist/templates' ) );
+
 	return gulp.src( './src/img/*.png' )
 		.pipe( gulp.dest( './dist/img' ) )
 } );
