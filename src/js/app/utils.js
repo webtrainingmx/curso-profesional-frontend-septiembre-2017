@@ -1,5 +1,7 @@
 (function() {
 
-	console.log( "Utils" );
+	var Http = (function() {
+		return {};
+	})();
 
 })();
