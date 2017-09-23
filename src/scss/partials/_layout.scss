@@ -76,11 +76,16 @@
 .b-main-footer {
 	height: 60px;
 	background-color: $color-primary;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
 
 .b-section {
 	overflow: hidden;
 	padding: 100px 0;
+	height: 50%;
 
 	&--learn-signals {
 		background-color: $color-secondary;
